@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+
+<h3>Are you sure you want to delete your Theme {{ theme.title }}?</h3>
+<form method="post">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <button class="btn btn-danger" type="submit">Delete</button>
+</form>
+
+<br>
+
+<a href="{% url 'dashboard' %}" class="btn btn-secondary" >Cancel</a>
+
+</div>
+
+{% endblock content %}

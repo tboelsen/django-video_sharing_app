@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+
+<div class="text-center">
+
+<h2>{{ theme.title }}</h2>
+<h4 class="text-muted">{{ theme.user.username }}</h4>
+
+{% if user.id == theme.user.id %}
+  <a href="{% url 'update_theme' theme.id %}" class="btn btn-primary">Edit Theme</a>
+  <a href="{% url 'add_video' theme.id %}" class="btn btn-primary">Add Video</a>
+  <a href="{% url 'delete_theme' theme.id %}" class="btn btn-danger">Delete Theme</a>
+{% endif %}
+
+</div>
+
+<br>
+
+    <div class="row">
+      {% for video in theme.video_set.all %}
+      <div class="col-md-4 mt-3">
+        <div class="card mb-4 shadow-sm">
+          <iframe width="100%" height="225" src="https://www.youtube.com/embed/{{ video.youtube_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="card-body">
+            <p class="card-text">{{ video.title }}</p>
+            {% if user.id == theme.user.id %}
+            <a href="{% url 'delete_video' video.id %}" class="btn btn-danger">Delete Video</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      </div>
+
+</div>
+
+{% endblock content %}
