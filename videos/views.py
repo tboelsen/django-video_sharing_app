@@ -10,8 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 import urllib
 import requests
+import os
 
-YOUTUBE_API_KEY = 'AIzaSyBWJ35sxnDu9bEVr0wdQ1IMB8ZauscIFEI'
+YOUTUBE_API_KEY = os.environ.get('YOUTUBE_API_KEY')
 
 def HomePageView(request):
     recent_themes = Theme.objects.all().order_by('-id')[:3]
